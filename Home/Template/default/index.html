@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>FeelRadio</title>
+    <meta charset="utf-8">
+    <link href="__CSS__/nanoscroller.css" rel="stylesheet">
+    <link href="__CSS__/feel.css" rel="stylesheet">
+    <script src="__JS__/sm2/script/soundmanager2-nodebug.js"></script>
+    <script src="__JS__/jquery-1.8.2.min.js"></script>
+    <script src="__JS__/overthrow.min.js"></script>
+    <script src="__JS__/jquery.nanoscroller.js"></script>
+    <script src="__JS__/handle.js"></script>
+  </head>
+  <body>
+    <div id="navbar">
+      <div class="center"><img src="__PIC__/logo/feel_logo.png"></div>
+    </div>
+    <div id="body">
+      <div id="menu">
+        <div id="program"><span>Menu</span>
+          <div id="drop">
+            <div class="nano">
+              <div id="inside" class="content">
+				
+			</div>
+            </div>
+          </div>
+        </div>
+        <div id="top10"><span>Top10 采访</span>
+          <div id="some">
+            <div class="nano">
+              <div id="record" class="content"></div>
+            </div>
+          </div>
+        </div><a id="dj-link" href="__PIC__/dj/page/index.html" target="_blank">魅力主播</a>
+      </div>
+      <div id="player"><img id="cover">
+        <div id="progress">
+          <div id="step"></div>
+        </div>
+        <div id="ctrl"><img id="backward" src="__PIC__/ctrl/backward.png"><img id="toggle" src="__PIC__/ctrl/pause.png"><img id="forward" src="__PIC__/ctrl/forward.png"></div>
+      </div>
+      <div id="info">
+        <div id="dj-info"><a href=""><img id="dj-avatar"></a><a id="dj-name" href="" target="_blank"></a><a id="sina" target="_blank"><img src="__PIC__/ctrl/sina.png"></a></div>
+        <div id="dj-intro"></div>
+        <div id="program-intro"></div>
+      </div>
+    </div>
+    <div id="list">
+      <div id="wrap-list">
+        <div class="nano">
+          <div id="insidelist" class="content"></div>
+        </div>
+      </div>
+    </div>
+    <div id="slide">往期节目</div>
+	<h1 ><a href="admin.php" target="_blank">快速进入后台</h1>
+  </body>
+<script>
+	var processFile ='index.php/Api/content';
+	$.ajax({
+		type:'POST',
+		url: processFile,
+		dataType:'json',
+		success: function(data){
+			for(i=0;i<data.length;i++)
+			{
+				$("#inside").after("<div class='program'>"+data[i].contentname+"</div>");
+			}	
+		}
+	});
+</script>
+</html>

@@ -1,0 +1,51 @@
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		 $(".sidebar_nav li span").click(
+		function(){
+			if($(this).next("ul").is(":hidden")) 
+				{	
+					$(".sidebar_nav li ul").slideUp(300);
+					$(this).next("ul").slideDown(300);
+				}
+			else
+				{
+					$(this).next("ul").slideUp(300);
+				};
+	});	
+	});
+</script>
+<div class="content">
+  <div class="sidebar_nav">
+    <ul class="unstyled">
+      <if condition="($Think.session.userpower eq 0)">
+      <li><span><a href="#"><i class="icon-wrench"></i>网站设置</a></span> 
+        <ul class="unstyled hide">
+          <li><a href="{:U('Setting/basic')}" target="myframe"><i class="caret_left"></i>基本设置</a></li>
+          <li><a href="{:U('User/manage')}" target="myframe"><i class="caret_left"></i>用户管理</a></li>
+          <li><a href="{:U('User/add')}" target="myframe"><i class="caret_left"></i>添加用户</a></li>
+        </ul>
+      </li>
+      </if>
+      <li><span><a href="#"><i class="icon-user"></i>主播管理</a></span> 
+        <ul class="unstyled hide">
+          <li><a href="{:U('DJ/add')}" target="myframe"><i class="caret_left"></i>添加DJ</a></li>
+          <li><a href="{:U('DJ/manage')}" target="myframe"><i class="caret_left"></i>管理DJ</a></li>
+        </ul>
+      </li>
+      <li><span><a href="#"><i class="icon-folder-open"></i>栏目管理</a></span> 
+        <ul class="unstyled hide">
+          <li><a href="{:U('Class/add')}" target="myframe"><i class="caret_left"></i>添加栏目</a></li>
+          <li><a href="{:U('Class/manage')}" target="myframe"><i class="caret_left"></i>管理栏目</a></li>
+        </ul>
+      </li>
+      <li><span><a href="#"><i class="icon-list"></i>节目管理</a></span> 
+        <ul class="unstyled hide">
+          <li><a href="{:U('Content/add')}" target="myframe"><i class="caret_left"></i>添加节目</a></li>
+          <li><a href="{:U('Content/manage')}" target="myframe"><i class="caret_left"></i>管理节目</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+

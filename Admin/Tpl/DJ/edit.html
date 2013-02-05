@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Feel</title>
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/bootstrap.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/jshack.js"></script>
+
+<link href="__PUBLIC__/Css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Css/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" >
+function addFace(){
+$('#myModalFace', window.parent.document).modal({
+  backdrop:false
+  })
+}
+function addHead(){
+$('#myModalHead', window.parent.document).modal({
+  backdrop:false
+  })
+}
+</script>
+<style type="text/css">
+#myModal {
+top:1300px; /* PLAY THE WITH THE VALUES TO SEE GET THE DESIRED EFFECT */
+}
+#preview{width:60px;height:60px;
+  /*border:0px solid #000;
+
+overflow:hidden;*/}
+#imghead {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);}
+</style>
+<script type="text/javascript">
+function previewImageFace(file)
+{
+  var MAXWIDTH  = 60;
+  var MAXHEIGHT = 60;
+  var div = document.getElementById('preview');
+  if (file.files && file.files[0])
+  {
+    div.innerHTML = '<img id=imghead>';
+    var img = document.getElementById('imghead');
+    img.onload = function(){
+      var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+      img.width = rect.width;
+      img.height = rect.height;
+      //img.style.marginLeft = rect.left+'px';
+      //img.style.marginTop = rect.top+'px';
+    }
+    var reader = new FileReader();
+    reader.onload = function(evt){img.src = evt.target.result;}
+    reader.readAsDataURL(file.files[0]);
+  }
+  else
+  {
+    var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+    file.select();
+    var src = document.selection.createRange().text;
+    div.innerHTML = '<img id=imghead>';
+    var img = document.getElementById('imghead');
+    img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+    var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+    status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+    div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;margin-left:"+rect.left+"px;"+sFilter+src+"\"'></div>";
+  }
+}
+function previewImageHead(file)
+{
+  var MAXWIDTH  = 400;
+  var MAXHEIGHT = 400;
+  var div = document.getElementById('preview2');
+  if (file.files && file.files[0])
+  {
+    div.innerHTML = '<img id=imghead2>';
+    var img = document.getElementById('imghead2');
+    img.onload = function(){
+      var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+      img.width = rect.width;
+      img.height = rect.height;
+      //img.style.marginLeft = rect.left+'px';
+      //img.style.marginTop = rect.top+'px';
+    }
+    var reader = new FileReader();
+    reader.onload = function(evt){img.src = evt.target.result;}
+    reader.readAsDataURL(file.files[0]);
+  }
+  else
+  {
+    var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+    file.select();
+    var src = document.selection.createRange().text;
+    div.innerHTML = '<img id=imghead2>';
+    var img = document.getElementById('imghead2');
+    img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+    var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+    status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+    div.innerHTML = "<div id=divhead2 style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;margin-left:"+rect.left+"px;"+sFilter+src+"\"'></div>";
+  }
+}
+function clacImgZoomParam( maxWidth, maxHeight, width, height ){
+  var param = {top:0, left:0, width:width, height:height};
+  if( width>maxWidth || height>maxHeight )
+  {
+    rateWidth = width / maxWidth;
+    rateHeight = height / maxHeight;
+    
+    if( rateWidth > rateHeight )
+    {
+      param.width =  maxWidth;
+      param.height = Math.round(height / rateWidth);
+    }else
+    {
+      param.width = Math.round(width / rateHeight);
+      param.height = maxHeight;
+    }
+  }
+  
+  param.left = Math.round((maxWidth - param.width) / 2);
+  param.top = Math.round((maxHeight - param.height) / 2);
+  return param;
+}
+</script>
+</head>
+
+<body>
+
+      <div class="content">
+        <div class="page-header">
+          <h3 class="fl">编辑主播</h3>
+          <div class="user_message fr"><i class="icon-user"></i>编辑主播</div>
+          <div class="cl"></div>
+        </div>
+        <form name="form1" id="form1" class="form-inline" action="{:U('DJ/edit')}" method="post"  enctype="multipart/form-data">
+        <table class="table set_table">
+          <thead>
+            <tr>
+              <th width="11%" >名 称</th>
+              <th >内 容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <input type="hidden" name="DJid" value="{$DJ.id}">
+            <tr>
+              <td>名字</td>
+              <td><input class="span4" name="username" id="username" type="text" value="{$DJ.name}"/></td>
+            </tr>
+            <tr>
+              <td>昵称</td>
+              <td><input class="span4" name="nickname" id="nickname" type="text" value="{$DJ.nickname}"/></td>
+            </tr>
+            <tr>
+              <td>星座</td>
+              <td><input class="span4" name="starsign" id="starsign" type="text" value="{$DJ.starsign}"/></td>
+            </tr>
+            <tr>
+              <td>兴趣</td>
+              <td><input class="span4" name="hobby" id="hobby" type="text" value="{$DJ.hobby}"/></td>
+            </tr>
+            <tr>
+              <td>上传Face头像</td>
+              <td>
+              <div id="preview">
+                <img id="imghead" width="60px" height="60px" border="0" src='__ROOT__{$DJ.faceaddress}'>
+              </div>
+              <input type="file" name="faceaddress" id="faceaddress" onchange="previewImageFace(this)" value="{$DJ.faceddress}"/>
+              </td>
+            </tr>
+            <tr>
+              <td>上传Head头像</td>
+              <td>
+              <div id="preview2">
+                <img id="imghead2" width="400px" height="400px" border="0" src='__ROOT__{$DJ.headaddress}'>
+              </div>
+              
+              <input type="file" name="headaddress" id="headaddress" onchange="previewImageHead(this)" value="{$DJ.headaddress}"/>
+              </td>
+            </tr>
+             <tr>
+              <td>个人简介</td>
+              <td><textarea class="input-xlarge span5" name="intro" id="intro" cols="20" rows="8" >{$DJ.intro}</textarea></td>
+            </tr>
+          
+            <tr>
+              <td>微博名</td>
+              <td><input class="span4" name="weibo-name" id="weibo-name" type="text" value="{$DJ.weibo-name}"/></td>
+            </tr>
+            <tr>
+              <td>微博地址</td>
+              <td><input class="span4" name="weibo-url" id="weibo-url" type="text" value="{$DJ.weibo-url}"/></td>
+            </tr>
+            <tr>
+              <td>对此节目评价</td>
+              <td><textarea class="input-xlarge span5" name="total" id="total" cols="20" rows="8">{$DJ.total}</textarea></td>
+            </tr>
+          </tbody>
+        </table>
+        </form>
+        <p class="border_top"> <a class="btn btn-primary btn-small" onClick="formSubmit();">提交编辑</a> </p>
+        <!--end 首页提示信息-->
+        <div class="copyright"></div>
+        <div class="modal hide" id="myModal">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h3>提交提示</h3>
+          </div>
+          <div class="modal-body"> <span id="modal"></span> </div>
+          <div class="modal-footer"> <a href="#" class="btn" data-dismiss="modal">关闭</a> </div>
+        </div>
+<script type="text/javascript">
+    $(".copyright").load("{:U('Index/copyright')}");
+</script> 
+  </div>
+ 
+ <script type="text/javascript">
+function formSubmit() {
+	  var msg='';
+  if($("#username").val()=="")
+  {
+    msg=msg + "主播名为空\n";
+  }
+  
+  if($("#nickname").val()=="")
+  {
+    msg=msg + "昵称为空\n";
+  }
+
+  if($("#starsign").val()=="")
+  {
+    msg=msg + "星座为空\n";
+    
+  }
+  if($("#weibo-name").val()=="")
+  {
+    msg=msg + "微博名为空\n";
+    
+  }
+
+  if($("#weibo-url").val()=="")
+  {
+    msg=msg + "微博地址为空\n";
+    
+  }
+  var length =$("#intro").val().length;
+  if(length>200 || length == 0)
+  {
+    msg=msg + "主播介绍应该小于200字且不为空\n";
+    
+  }
+
+  length =$("#total").val().length;
+  if(length>200 || length == 0)
+  {
+    msg=msg + "对此节目介绍应该小于200字且不为空\n";
+  }
+  if(msg.length > 0)
+  {
+    $( '#myModal' ).modal('show');
+    $( '#modal' ).html( '<font style="font-family:Arial;font-size:12px;color:#c3413f">'+msg+'</font>');
+  }
+  else
+  {
+    document.form1.submit();
+  }
+}
+</script>
+</body>
+</html>

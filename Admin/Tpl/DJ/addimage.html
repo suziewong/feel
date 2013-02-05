@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Feel</title>
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/bootstrap.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/jshack.js"></script>
+
+<link href="__PUBLIC__/Css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<style type="text/css">
+#myModal {
+top:1300px; /* PLAY THE WITH THE VALUES TO SEE GET THE DESIRED EFFECT */
+}
+</style>
+<body>
+      <div class="content">
+        <div class="page-header">
+          <h3 class="fl">添加 {$DJ.name}-{$DJ.nickname} 主播生活照</h3>
+          <div class="user_message fr"><i class="icon-user"></i>增加主播生活照</div>
+          <div class="cl"></div>
+        </div>
+        <form name="form1" id="form1" class="form-inline" action="{:U('DJ/addimage')}" method="post" enctype="multipart/form-data">
+        <table class="table set_table">
+          <thead>
+            <tr>
+              <th width="11%" >名 称</th>
+              <th >内 容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <input type="hidden" name="DJid" value="{$DJ.id}">
+            <tr>
+              <td>上传生活照</td>
+              <td>
+                <span id="liferow">
+                  <input class="span4" name="life[]"  type="file"/>
+                  <br/>
+                </span>
+              <div id="editrow">
+                <span id="adds"><a href="javascript:addpic()">添加一个</a></span>
+                <span id="dels" style="display:none;"><a href="javascript:delpic()">减少一个</a></span>
+              </div>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+        </form>
+        <p class="border_top"> <a class="btn btn-primary btn-small" onClick="formSubmit();">增加新生活照</a> </p>
+        <!--end 首页提示信息-->
+        <div class="copyright"></div>
+        <div class="modal hide" id="myModal">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h3>提交提示</h3>
+          </div>
+          <div class="modal-body"> <span id="modal"></span> </div>
+          <div class="modal-footer"> <a href="#" class="btn" data-dismiss="modal">关闭</a> </div>
+        </div>
+<script type="text/javascript">
+    $(".copyright").load("{:U('Index/copyright')}");
+</script> 
+  </div>
+ 
+ <script type="text/javascript">
+    var i = 0;
+    function addpic()
+    {
+        i++;
+        if(i == 1)
+        {
+            $("#dels").show();
+        }
+        $("#liferow:last").append("<input class='span4' name='life[]'  type='file'/><br/>");
+    }
+    function delpic()
+    {
+        i--;
+        if(i == 0)
+        {
+            $("#dels").hide();
+        }
+        $("#liferow input:last").remove();
+        $("#liferow br:last").remove();
+    }
+  function formSubmit() {
+
+  var msg='';
+  if(msg.length > 0)
+  {
+    $( '#myModal' ).modal('show');
+    $( '#modal' ).html( '<font style="font-family:Arial;font-size:12px;color:#c3413f">'+msg+'</font>');
+  }
+  else
+  {
+    document.form1.submit();
+  }
+}
+</script>
+</body>
+</html>
