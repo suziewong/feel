@@ -13,13 +13,6 @@ class SettingAction extends CommonAction {
 
 		if(isset($_POST['feel'])){
 
-			//$model = M("Setting");
-			//		var_dump($_POST);
-			//exit;
-			//@unlink(RUNTIME_PATH.'~runtime.php');
-			// 更新数据
-			//$data['sitename']=$_POST['feel']['sitename'];
-			//$setting = M('Setting');
 			if ($this->_update($_POST['feel'])) {
 			//成功提示
 				$this->success('基本配置修改成功');
@@ -36,6 +29,12 @@ class SettingAction extends CommonAction {
 			$this->display();
 		}
     }
+    // 全局设置
+    public function all()
+    {
+    	
+    }
+
 	protected function _update($settingarr, $item = '') {
 		if($item == '') $item = $this->item;
 		$setting = M('Setting');

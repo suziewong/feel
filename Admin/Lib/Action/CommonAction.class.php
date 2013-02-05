@@ -11,82 +11,6 @@ class CommonAction extends Action {
     public function index(){
     	
     }
-	// 图片上传
-	/*public function imageUpload() {
-		$error = "";
-		$msg = "";
-		if($_GET["tag"] =='faceToUpload')
-		{
-			$fileElementName = 'faceToUpload';
-		}
-		elseif($_GET["tag"] =='headToUpload')
-		{
-			$fileElementName = 'headToUpload';
-		}
-        else
-        {
-            $fileElementName = 'MP3ToUpload';
-        }
-		if(!empty($_FILES[$fileElementName]['error']))
-		{
-			switch($_FILES[$fileElementName]['error'])
-			{
-	
-				case '1':
-					$error = 'The uploaded file exceeds the upload_max_filesize directive in php.ini';
-					break;
-				case '2':
-					$error = 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form';
-					break;
-				case '3':
-					$error = 'The uploaded file was only partially uploaded';
-					break;
-				case '4':
-					$error = 'No file was uploaded.';
-					break;
-	
-				case '6':
-					$error = 'Missing a temporary folder';
-					break;
-				case '7':
-					$error = 'Failed to write file to disk';
-					break;
-				case '8':
-					$error = 'File upload stopped by extension';
-					break;
-				case '999':
-				default:
-					$error = 'No error code avaiable';
-			}
-		}elseif(empty($_FILES[$fileElementName]['tmp_name']) || $_FILES[$fileElementName]['tmp_name'] == 'none')
-		{
-			$error = 'No file was uploaded..';
-		}else 
-		{
-			if($_GET["tag"] =='faceToUpload')
-			{
-				//$fileElementName = 'faceToUpload';
-				$info = $this->upload(1);
-			}
-			elseif($_GET["tag"] =='headToUpload')
-			{
-				//$fileElementName = 'headToUpload';
-				$info = $this->upload(2);
-			}
-            else
-            {
-			     $info =$this->upload(3);
-			}
-			$msg = $info[0]["savename"];
-			//for security reason, we force to remove all uploaded file
-			@unlink($_FILES[$fileElementName]);		
-		}		
-		echo "{";
-		echo	"error: '" . $error . "',\n";
-		echo	"msg: '" . $msg . "'\n";
-		echo "}";
-	}
-	*/
 	//文件上传
 	Public function upload($tag){
 		import('ORG.Net.UploadFile');
@@ -173,16 +97,16 @@ class CommonAction extends Action {
 		{
 		 	if( unlink($filename) )
 		 	{
-		 	 	echo '文件删除成功';
+		 	 	//echo '文件删除成功';
 		 	}
 		 	else
 		 	{
-		  		echo '文件删除失败，权限不够';
+		  		//echo '文件删除失败，权限不够';
 		 	}
 		}
 		else
 		{
-            		echo '不是有一个有效的文件';
+            	//	echo '不是有一个有效的文件';
 		}
 	}
 }
