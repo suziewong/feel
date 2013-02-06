@@ -41,13 +41,13 @@ class SettingAction extends CommonAction {
 			{
 				@unlink(RUNTIME_PATH.'~runtime.php');
 				// 更新数据
-				if ($this->_update($_POST['all'])) {
+				//if ($this->_update($_POST['all'])) {
 					//成功提示
 					$this->success('全局设置修改成功');
-				} else {
+				//} else {
 					//错误提示
-					$this->error('全局设置修改失败');
-				}
+				//	$this->error('全局设置修改失败');
+				//}
 			} else $this->error('全局设置修改失败');
     	}
     	else

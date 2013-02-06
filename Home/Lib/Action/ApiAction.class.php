@@ -18,7 +18,7 @@ class ApiAction extends Action {
 	public function dj()
 	{
 		$Dj = M("Dj");
-		$condition['id']=!empty($_POST['djid'])?$_POST['djid']:"";
+		$condition['id']=!empty($_GET['djid'])?$_GET['djid']:"";
 		//var_dump($condition);
 		if($condition['id'] == "")
 		{
@@ -35,8 +35,8 @@ class ApiAction extends Action {
 	public function content()
 	{
 		$Content = M("Content");
-		$classid = isset($_POST['classid'])?$_POST['classid']:2;
-		$condition['classid']=$_POST['classid'];
+		$classid = isset($_GET['classid'])?$_GET['classid']:2;
+		$condition['classid']=$classid;
 		$Content = $Content->where($condition)->select();
 		echo json_encode($Content);
 	}	

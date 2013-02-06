@@ -84,7 +84,7 @@
 	var processFile ='index.php/Api/content';
   var formData = "classid=2";
 	$.ajax({
-		type:'POST',
+		type:'GET',
 		url: processFile,
     data: formData,
 		dataType:'json',
@@ -99,7 +99,7 @@
   var processFile ='index.php/Api/content';
   var formData = "classid=3";
   $.ajax({
-    type:'POST',
+    type:'GET',
     url: processFile,
     data: formData,
     dataType:'json',
@@ -114,7 +114,7 @@
   var processFile ='index.php/Api/dj';
   //var formData = "djid=2";
   $.ajax({
-    type:'POST',
+    type:'GET',
     url: processFile,
     data: formData,
     dataType:'json',
