@@ -18,15 +18,26 @@ class ApiAction extends Action {
 	public function dj()
 	{
 		$Dj = M("Dj");
-		$Dj = $Dj->select();
+		$condition['id']=!empty($_POST['djid'])?$_POST['djid']:"";
+		//var_dump($condition);
+		if($condition['id'] == "")
+		{
+			$Dj = $Dj->select();
+		}
+		else
+		{
+			$Dj = $Dj->where($condition)->select();
+		}
 		echo json_encode($Dj);
+
 	}
 	//节目信息
 	public function content()
 	{
 		$Content = M("Content");
-		$Content = $Content->select();
+		$classid = isset($_POST['classid'])?$_POST['classid']:2;
+		$condition['classid']=$_POST['classid'];
+		$Content = $Content->where($condition)->select();
 		echo json_encode($Content);
-		
 	}	
 }

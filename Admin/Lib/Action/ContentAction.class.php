@@ -15,7 +15,6 @@ class ContentAction extends CommonAction{
 			$data["intro"] 			= $_POST["intro"];
 			$data["number"]	  		= $_POST["number"];
 
-            
 			$info = $this->upload(3);
             $data["mp3address"]	= "/Common/Uploads/MP3/".$info[0]["savename"];
 
@@ -23,7 +22,7 @@ class ContentAction extends CommonAction{
             $result = $Content->add($data);
             if ( $result ){
                 //成功提示
-                $this->success('增加节目成功','../Content/manage');
+                $this->success('增加节目成功',U('Content/manage'));
             }
             else{
                 //错误提示
@@ -119,12 +118,12 @@ where feel_content.classid = feel_class.classid");
                 if ($result)
                 {
                     //成功提示
-                    $this->success('编辑节目成功','../Content/manage');
+                    $this->success('编辑节目成功',U('Content/manage'));
                 }
                 else
                 {
                     //错误提示
-                    $this->error('编辑节目失败','../Content/manage');
+                    $this->error('编辑节目失败',U('Content/manage'));
                 }
             } 
         }

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>魅力主播</title>
+    <meta charset="utf-8">
+    <link href="__CSS__/nanoscroller.css" rel="stylesheet">
+    <link href="__CSS__/page.css" rel="stylesheet">
+    <script src="__CSS__/jquery-1.8.2.min.js"></script>
+    <script src="__CSS__/overthrow.min.js"></script>
+    <script src="__CSS__/jquery.nanoscroller.js"></script>
+    <script src="__CSS__/handle.js"></script>
+  </head>
+  <body>
+    <div id="banner"><img src="__PIC__/logo.png"></div>
+    <div id="body">
+      <div id="hide">
+        <div class="nano">
+          <div id="wall" class="content"></div>
+        </div>
+      </div>
+      <div id="play">
+        <div id="intro">
+          <div id="border"><img src=""></div>
+          <div id="about">
+            <div id="name"></div>
+            <div id="starsign"></div>
+            <div id="hobby"></div>
+          </div>
+        </div>
+        <div id="more"></div>
+      </div>
+    </div>
+  </body>
+</div>
+<script>
+  var processFile ="{:U('Api/dj')}";
+  //var formData = "djid=15";
+  var formData= "";
+  $.ajax({
+    type:'POST',
+    url: processFile,
+    data: formData,
+    dataType:'json',
+    success: function(data){
+     for(i=0;i<data.length;i++)
+      {
+        //alert(data[i].name);
+        $("#wall").after("<div class='dj' id='刘思纤'><img src='/feel"+data[i].faceaddress+"'><span>"+data[i].name+"</span></div>");
+        //$("#wall").after("<h1>"+data[i].name+"</h1>");
+      }
+    }
+  });
+  </script>
+</html>

@@ -64,7 +64,7 @@ class DJAction extends CommonAction {
                 $result = $Dj->add($data);
                 if ( $result ) {
                     //成功提示
-                    $this->success('增加主播成功','../DJ/manage');
+                    $this->success('增加主播成功',U('DJ/manage'));
                 } else {
                     //错误提示
                     $this->error('增加主播失败');
@@ -174,12 +174,12 @@ class DJAction extends CommonAction {
                 if ($result) 
                 {
                     //成功提示
-                    $this->success('编辑主播成功','../DJ/manage');
+                    $this->success('编辑主播成功',U('DJ/manage'));
                 }
                 else
                 {
                     //错误提示
-                    $this->error('木有发生更改,编辑主播失败','../DJ/manage');
+                    $this->error('木有发生更改,编辑主播失败',U('DJ/manage'));
                 }
             } 
         }
@@ -251,7 +251,8 @@ class DJAction extends CommonAction {
                     $this->error('增加主播生活照失败');
                 }
             }
-            $re = '../DJ/manageimage/id/'.$_POST["DJid"];
+           // $re = '../DJ/manageimage/id/'.$_POST["DJid"];
+            $re = U('DJ/manageimage?id='.$_POST["DJid"]);
             $this->success('增加生活照成功',$re);
            
         }
@@ -288,7 +289,8 @@ class DJAction extends CommonAction {
                 $this->del_file($djlifes[$i]['lifeaddress']);
             }
             $result = $model->where($map)->delete();
-            $re = '../DJ/manageimage/id/'.$_POST["djid"];
+            //$re = '../DJ/manageimage/id/'.$_POST["djid"];
+            $re = U('DJ/manageimage?id='.$_POST["djid"]);
             $this->success('编辑生活照成功',$re);
         }
         else

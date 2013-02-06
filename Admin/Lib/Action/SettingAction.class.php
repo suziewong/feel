@@ -32,7 +32,31 @@ class SettingAction extends CommonAction {
     // 全局设置
     public function all()
     {
-    	
+
+    	if(isset($_POST['all'])) {
+    		$v=$_POST['all']['theme'];
+    		$tmp = file_get_contents(CONF_PATH.'config.php');
+			$tmp = preg_replace("/'HOME_DEFAULT_THEME'\s*\=\>\s*'.*?'\,/is", "'HOME_DEFAULT_THEME' => '".$v."',", $tmp);
+			if(file_put_contents(CONF_PATH.'config.php',$tmp))
+			{
+				@unlink(RUNTIME_PATH.'~runtime.php');
+				// 更新数据
+				if ($this->_update($_POST['all'])) {
+					//成功提示
+					$this->success('全局设置修改成功');
+				} else {
+					//错误提示
+					$this->error('全局设置修改失败');
+				}
+			} else $this->error('全局设置修改失败');
+    	}
+    	else
+    	{
+    		$all =array();
+    		$all['theme'] = C('HOME_DEFAULT_THEME');
+    		$this->assign("all",$all);
+    		$this->display();
+    	}
     }
 
 	protected function _update($settingarr, $item = '') {

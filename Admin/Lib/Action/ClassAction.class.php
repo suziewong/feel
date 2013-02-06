@@ -19,7 +19,7 @@
 				    $result = $Class->add($data);
 				    if ( $result ){
 				        //成功提示
-				        $this->success('增加栏目成功','../Class/manage');
+				        $this->success('增加栏目成功',U('Class/manage'));
 				    }
 				    else{
 				        //错误提示
@@ -47,12 +47,12 @@
             if ($result)
             {
                 //成功提示
-                $this->success('编辑节目成功','../Class/manage');
+                $this->success('编辑节目成功',U('Class/manage'));
             }
             else
             {
                 //错误提示
-                $this->error('编辑节目失败','../Class/manage');
+                $this->error('编辑节目失败',U('Class/manage'));
             }
             
         }

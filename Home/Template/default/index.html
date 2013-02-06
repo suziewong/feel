@@ -10,6 +10,25 @@
     <script src="__JS__/overthrow.min.js"></script>
     <script src="__JS__/jquery.nanoscroller.js"></script>
     <script src="__JS__/handle.js"></script>
+    <style>
+      #bottom {
+        width:500px;
+        /*left: 500px;*/
+        margin: 0 auto;
+        margin-top: 600px;
+      }
+      #bottom a{
+        font-size: 10px;
+        color: #fff;
+
+      }
+      #menu #drop{
+        height:150px;
+      }
+      #list {
+        width: 200px;
+      }
+    </style>
   </head>
   <body>
     <div id="navbar">
@@ -17,7 +36,7 @@
     </div>
     <div id="body">
       <div id="menu">
-        <div id="program"><span>Menu</span>
+        <div id="program"><span title="点击展开或者缩小">Menu</span>
           <div id="drop">
             <div class="nano">
               <div id="inside" class="content">
@@ -32,7 +51,9 @@
               <div id="record" class="content"></div>
             </div>
           </div>
-        </div><a id="dj-link" href="__PIC__/dj/page/index.html" target="_blank">魅力主播</a>
+        </div>
+        <a id="dj-link" href="{:U('dj')}" target="_blank">魅力主播</a>
+         <div id="dj" class="content"></div>
       </div>
       <div id="player"><img id="cover">
         <div id="progress">
@@ -54,13 +75,18 @@
       </div>
     </div>
     <div id="slide">往期节目</div>
-	<h1 ><a href="admin.php" target="_blank">快速进入后台</h1>
+    <div id="bottom">
+    <a href="admin.php" target="_blank">后台</a>&nbsp;&nbsp;<span style="float:right"><a href="http://www.myzjut.org" target="_blank">精弘网络 2002-2013</a></span><div>
+	  
   </body>
 <script>
+  //节目
 	var processFile ='index.php/Api/content';
+  var formData = "classid=2";
 	$.ajax({
 		type:'POST',
 		url: processFile,
+    data: formData,
 		dataType:'json',
 		success: function(data){
 			for(i=0;i<data.length;i++)
@@ -69,5 +95,35 @@
 			}	
 		}
 	});
+  //特殊节目
+  var processFile ='index.php/Api/content';
+  var formData = "classid=3";
+  $.ajax({
+    type:'POST',
+    url: processFile,
+    data: formData,
+    dataType:'json',
+    success: function(data){
+      for(i=0;i<data.length;i++)
+      {
+        $("#record").after("<div class='program'>"+data[i].contentname+"</div>");
+      } 
+    }
+  });
+  //主播
+  var processFile ='index.php/Api/dj';
+  //var formData = "djid=2";
+  $.ajax({
+    type:'POST',
+    url: processFile,
+    data: formData,
+    dataType:'json',
+    success: function(data){
+      for(i=0;i<data.length;i++)
+      {
+        $("#dj").after("<div class='program'>"+data[i].name+"</div>");
+      } 
+    }
+  });
 </script>
 </html>

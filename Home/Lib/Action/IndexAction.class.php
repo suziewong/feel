@@ -3,7 +3,12 @@
 class IndexAction extends Action {
 	
     public function index(){
-    	$this->assign("C","你好");
+    	//var_dump($config);
+    	//C('HOME_DEFAULT_THEME');
     	$this->display(C('HOME_DEFAULT_THEME').':index');
+	}
+	public function dj()
+	{
+		$this->display(C('HOME_DEFAULT_THEME').':dj');
 	}
 }
