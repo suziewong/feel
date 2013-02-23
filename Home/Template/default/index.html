@@ -6,10 +6,14 @@
     <link href="__CSS__/nanoscroller.css" rel="stylesheet">
     <link href="__CSS__/feel.css" rel="stylesheet">
     <script src="__JS__/sm2/script/soundmanager2-nodebug.js"></script>
+
     <script src="__JS__/jquery-1.8.2.min.js"></script>
     <script src="__JS__/overthrow.min.js"></script>
     <script src="__JS__/jquery.nanoscroller.js"></script>
     <script src="__JS__/handle.js"></script>
+
+        <script type="text/javascript" src="__PUBLIC__/Js/bootstrap.js"></script>
+    <link href="__PUBLIC__/Css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <style>
       #bottom {
         width:500px;
@@ -27,6 +31,18 @@
       }
       #list {
         width: 200px;
+      }
+      .advicetable {
+        margin-top: 30px;
+      }
+      .advicetable td {
+        width:130px;
+      }
+      .advicetable input {
+        height: 25px;
+      }
+      .btn {
+        color: black;
       }
     </style>
   </head>
@@ -76,8 +92,30 @@
     </div>
     <div id="slide">往期节目</div>
     <div id="bottom">
+    <a href="#" onclick="advice()">给精弘提建议</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="#" onclick="">校园原创音乐分享平台+评论+分享功能</a>&nbsp;&nbsp;&nbsp;&nbsp;
     <a href="admin.php" target="_blank">后台</a>&nbsp;&nbsp;<span style="float:right"><a href="http://www.myzjut.org" target="_blank">精弘网络 2002-2013</a></span><div>
-	  
+    <!-- 提建议 -->
+	  <div class="modal hide" id="myModal">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>给精弘提建议</h3>
+      </div>
+      <div class="modal-body">
+        <span id="modal"></span> 
+        <table class="advicetable">
+          <tr>
+              <td>昵称</td>
+              <td><input class="span4" name="nickname" id="nickname" type="text"/></td>
+          </tr>
+          <tr>
+            <td>建议</td>
+            <td><textarea class="input-xlarge span5" name="advice" id="advice" cols="20" rows="8"></textarea></td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer"><a href="#" class="btn" data-dismiss="modal" style="color:black;">提交</a> </div>
+    </div>
   </body>
 <script>
   //节目
@@ -125,5 +163,12 @@
       } 
     }
   });
+
+  function advice()
+  {
+    var msg="精弘feel电台的未来由你来选择，你的每一个想法与建议都是精弘feel电台的宝贵财富";
+    $('#myModal').modal('show');
+    $('#modal').html('<font style="font-family:Arial;font-size:12px;color:#c3413f">'+msg+'</font>');
+  }
 </script>
 </html>
