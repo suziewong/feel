@@ -243,16 +243,16 @@ function formSubmit() {
     
   }
   var length =$("#intro").val().length;
-  if(length>200 || length == 0)
+  if(length>300 || length == 0)
   {
-    msg=msg + "主播介绍应该小于200字且不为空\n";
+    msg=msg + "主播介绍应该小于300字且不为空\n";
     
   }
 
   length =$("#total").val().length;
-  if(length>200 || length == 0)
+  if(length>300 || length == 0)
   {
-    msg=msg + "对此节目介绍应该小于200字且不为空\n";
+    msg=msg + "对此节目介绍应该小于300字且不为空\n";
   }
   if(msg.length > 0)
   {
