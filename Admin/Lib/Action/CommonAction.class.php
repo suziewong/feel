@@ -75,12 +75,14 @@ class CommonAction extends Action {
         	//exit;
         }
 		if(!$info) {// 上传错误 提示错诣信息
-	//		var_dump($upload->getErrorMsg());
-//exit;
+#			var_dump($upload->getErrorMsg());
+#exit;
 			$this->error($upload->getErrorMsg());
 		}else{// 上传成功 获取上传文件信息
+#			var_dump($upload->getErrorMsg());
 			
-			//var_dump($info);
+#		var_dump($info);
+#exit;
 		}
 		return $info;
 	}

@@ -11,4 +11,9 @@ class IndexAction extends Action {
 	{
 		$this->display(C('HOME_DEFAULT_THEME').':dj');
 	}
+	public function test()
+	{
+		//echo C('HOME_DEFAULT_THEME').'/feel-static:index';
+		$this->display(C('HOME_DEFAULT_THEME').'/feel-static:index');
+	}
 }

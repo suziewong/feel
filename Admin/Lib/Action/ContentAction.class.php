@@ -16,6 +16,7 @@ class ContentAction extends CommonAction{
 			$data["number"]	  		= $_POST["number"];
 
 			$info = $this->upload(3);
+#			exit;
             $data["mp3address"]	= "/Common/Uploads/MP3/".$info[0]["savename"];
 
 			$Content = M('Content');
