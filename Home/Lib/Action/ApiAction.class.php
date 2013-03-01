@@ -1,6 +1,10 @@
 <?php
 class ApiAction extends Action {
-    
+    public function _initialize()
+    {
+      
+      header("Access-Control-Allow-Origin:*");
+    }
     public function index(){
     	redirect(U('Index/index'));
 	}
