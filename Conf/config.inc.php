@@ -4,10 +4,10 @@ return array(
 	// 添加数据库配置信息
 	'URL_MODEL'=>  0, 			// 0普通模式，1.pathinfo[利于SEO] 如果你的环境不支持PATHINFO 请设置为3
 	'DB_TYPE'   => 'mysql', 	// 数据库类型
-	'DB_HOST'   => 'localhost', // 服务器地址
+	'DB_HOST'   => '', // 服务器地址
 	'DB_NAME'   => 'feel', 		// 数据库名
-	'DB_USER'   => 'suzie', 	// 用户名
-	'DB_PWD'    => '027267', 	// 密码
+	'DB_USER'   => '', 	// 用户名
+	'DB_PWD'    => '', 	// 密码
 	'DB_PORT'   => 3306, 		// 端口
 	'DB_PREFIX' => 'feel_', 	// 数据库表前缀
 
