@@ -1,6 +1,6 @@
 <?php
 //开启调试模式
-//define('APP_DEBUG', true);
+define('APP_DEBUG', true);
 //定义项目名称和路径
 define('APP_NAME', 'Admin');
 define('APP_PATH', './Admin/');

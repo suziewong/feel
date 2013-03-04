@@ -72,6 +72,7 @@ class UserAction extends Action {
     {
         if(session('userid')) {    
             session('userid',null);
+            session('verify',null);
             session('username',null);
             session('userpower',null);
             session('lastlogintime',null);
