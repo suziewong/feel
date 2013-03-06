@@ -120,7 +120,7 @@
 <script>
   //节目
 	var processFile ='index.php/Api/content';
-  var formData = "classid=2";
+  var formData = "classid=0";
 	$.ajax({
 		type:'GET',
 		url: processFile,
@@ -160,9 +160,10 @@
       for(i=0;i<data.length;i++)
       {
         $("#dj").after("<div class='program'>"+data[i].name+"</div>");
-      } 
+      }
     }
   });
+
 
   function advice()
   {
@@ -170,5 +171,25 @@
     $('#myModal').modal('show');
     $('#modal').html('<font style="font-family:Arial;font-size:12px;color:#c3413f">'+msg+'</font>');
   }
+
+
+   $(".btn").live("click",function(event){
+   // $(".admin").live("click",function(event){
+       //阻止表单提交
+       var processFile ='index.php/Api/suggest';
+       event.preventDefault();
+      
+      $.ajax({
+           type : "POST",
+           url: processFile,
+           data: "suggest=222&name=酥西黄&email=suzie@admin.com",
+           success: function(data){
+              alert(data);
+           }
+      });
+     });
+
+
+
 </script>
 </html>

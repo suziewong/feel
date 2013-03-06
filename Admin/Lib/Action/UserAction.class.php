@@ -37,6 +37,7 @@ class UserAction extends Action {
                 session('username',$user_info['username']);
                 session('userpower',$user_info['userpower']);
                 session('lastlogintime',$user_info['lastlogintime']);
+                session('djid',$user_info['djid']);
                         
                         // 更新帐号登录信息
                 $loginip = get_client_ip();
@@ -115,6 +116,7 @@ class UserAction extends Action {
             $data['userpassword'] = md5($_POST['password']);
             $data['userpower'] = $_POST['user_type'];
             $user = M('User');
+
             if(isset($_POST['userid'])) {
                 //编辑数据
                 $condition['id'] = $_POST['userid'];
@@ -165,7 +167,7 @@ class UserAction extends Action {
         
         import("ORG.Util.Page");// 导入分页类
         $count = count($userList);// 查询满足要求的总记录数
-        $length = 3;
+        $length = 10;
         $offset = $length * ($page - 1);
         $Page = new Page($count,$length,$page);// 实例化分页类 传入总记录数和每页显示的记录数和当前页数
         $Page->setConfig('theme',' %upPage%   %linkPage%  %downPage%');

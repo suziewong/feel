@@ -12,12 +12,20 @@
 			    $result = $model->where($map)->delete();
 		    }
     	    $CommentList = array();
- #   	$Comment = M("Comment");
     	    $page = isset($_GET['p'])? $_GET['p'] : '1';  //默认显示首页数据
 
- #   	$Comment = $Comment->order('id asc')->select();
+            $sql="select feel_comment.id,feel_dj.id as djid,feel_dj.name,uid,posttime,comment from feel_comment,feel_dj where feel_dj.id = feel_comment.djid";
+            if(session('djid') > 0)
+            {
+                $sql .=" and feel_dj.id=";
+                $sql .=session('djid');
+            }
+            else
+            {
+                
+            }
             $Model = new Model();
-            $Comment = $Model->query("select feel_comment.id,feel_dj.id as djid,feel_dj.name,uid,posttime,comment from feel_comment,feel_dj where feel_dj.id = feel_comment.djid;");
+            $Comment = $Model->query($sql);
     	while (list($key, $val) = each($Comment)) {
     	    array_push($CommentList,$val);
     	}	
@@ -107,14 +115,14 @@
         /*添加建议*/
         public function suggestadd()
         {
-            if(isset($_POST['comment']))
+            if(isset($_POST['suggest']))
             {
                 $data = array();
                 $data['uid']  = $_POST['uid'];
                 $data['suggest'] = $_POST['suggest'];
                 $data['posttime']=time();
-                $Comment = M('Suggest');
-                $result = $Comment->add($data);
+                $Suggest = M('Suggest');
+                $result = $Suggest->add($data);
             
                 if($result)
                 {
@@ -137,8 +145,8 @@
     
            
             $condition['id'] = $commentid;
-            $Comment = M('Suggest');
-            $result = $Comment->where($condition)->delete();
+            $Suggest = M('Suggest');
+            $result = $Suggest->where($condition)->delete();
             if ($result) {
                 //成功提示
                 $this->success('建议删除成功');

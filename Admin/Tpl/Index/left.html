@@ -29,6 +29,7 @@
       </li>
       <li><span><a href="#"><i class="icon-user"></i>主播管理</a></span> 
         <ul class="unstyled hide">
+
           <li><a href="{:U('DJ/add')}" target="myframe"><i class="caret_left"></i>添加DJ</a></li>
           <li><a href="{:U('DJ/manage')}" target="myframe"><i class="caret_left"></i>管理DJ</a></li>
         </ul>
@@ -46,9 +47,18 @@
         </ul>
       </li>
       </if>
+      <if condition="($Think.session.userpower neq 0)">
+      <li><span><a href="#"><i class="icon-comment"></i>编辑资料</a></span> 
+        <ul class="unstyled hide">
+          <li><a href="{:U('DJ/edit')}" target="myframe"><i class="caret_left"></i>编辑自己</a></li>
+        </ul>
+      </li>
+      </if>
       <li><span><a href="#"><i class="icon-comment"></i>评论管理</a></span> 
         <ul class="unstyled hide">
+          <!--
           <li><a href="{:U('Comment/add')}" target="myframe"><i class="caret_left"></i>添加评论</a></li>
+        -->
           <li><a href="{:U('Comment/manage')}" target="myframe"><i class="caret_left"></i>管理评论</a></li>
           <li><a href="{:U('Comment/suggest')}" target="myframe"><i class="caret_left"></i>建议</a></li>
         </ul>

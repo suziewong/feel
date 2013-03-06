@@ -133,4 +133,67 @@ class ApiAction extends Action {
 		}
 		echo json_encode($Life);
 	}
+	/*
+		评论
+	*/
+	public function comment()
+	{
+		$Comment = M("Comment");
+		if(isset($_POST['djid']))
+		{
+		    $data = array();
+		    $data['djid'] = $_POST['djid'];
+		    $data['comment'] = $_POST['comment'];
+		    $data['posttime']=time();
+		    $Comment = M('Comment');
+		    $result = $Comment->add($data);
+		
+		    if($result)
+		    {
+		        echo "{'result':'success'}";
+		    }
+		    else
+		    {
+		        echo "{'result':'fail'}"; 
+		    }
+		}
+		else
+		{
+			 echo "{'result':'fail'}"; 
+		}
+	}
+	/*
+		建议
+	*/
+	public function suggest()
+	{
+		
+		if(isset($_POST['suggest']))
+        {
+
+            $data = array();
+            $data['name'] = $_POST['name'];
+            $data['email'] = $_POST['email'];
+            $data['suggest'] = $_POST['suggest'];
+            $data['posttime']=time();
+           
+            $Suggest = M('Suggest');
+            $result = $Suggest->add($data);
+        	
+            if($result)
+            {
+                echo "{'result':'success'}";
+            }
+            else
+            {
+                echo "{'result':'fail'}"; 
+            }
+        }
+        else
+        {
+        	  echo "{'result':'fail'}"; 
+        }
+	}
+
+
 }

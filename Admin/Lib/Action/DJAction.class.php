@@ -26,8 +26,6 @@ class DJAction extends CommonAction {
     		$data["nickname"] = $_POST["nickname"];
     		$data["starsign"] = $_POST["starsign"];
     		$data["hobby"]	  = $_POST["hobby"];
-    		//$data["faceaddress"]= "/feel/Common/Admin/images/flower2.jpg";
-    		//$data["headaddress"]= "/feel/Common/Admin/images/flower2.jpg";
     		$data["intro"] = $_POST["intro"];
     		$data["weibo-name"] = $_POST["weibo-name"];
     		$data["weibo-url"] = $_POST["weibo-url"];
@@ -59,10 +57,21 @@ class DJAction extends CommonAction {
                 }
             } else {
                 // 添加数据
-                //$Dj->create($data);
-                //$Dj->data($data)->add();
+                
+
                 $result = $Dj->add($data);
-                if ( $result ) {
+                 $conditionname['name'] = $data["name"];
+                 $djinfo = $Dj->field('id')->where($conditionname)->select();
+                 //直接创建用户
+                $userdata=array();
+                $userdata['username'] = $data["name"];
+                $userdata['userpassword'] = md5("123456");
+                $userdata['userpower'] = 1;
+                $userdata['djid'] = $djinfo[0]['id'];
+                $user = M('User');
+                $userresult = $user->add($userdata);
+                
+                if ( $result && $userresult){ 
                     //成功提示
                     $this->success('增加主播成功',U('DJ/manage'));
                 } else {
@@ -129,6 +138,14 @@ class DJAction extends CommonAction {
     }
     public function edit()
     {
+        if(session('userpower') != 0)
+        {
+            $_GET['id']=session('djid');
+        }
+        else
+        {
+
+        }
         if(isset($_POST["DJid"]))
         {
             $data["name"] 	  = $_POST["username"];

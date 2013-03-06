@@ -66,7 +66,8 @@ function setVal(suoshuId,suoshuName) {
                 	<tr>
                     	<th width="5%" class="table-textcenter">选择</th>
                         <th width="5%" class="table-textcenter">ID</th>
-                        <th width="15%" class="table-textcenter">uid</th>
+                        <th width="10%" class="table-textcenter">昵称</th>
+                        <th width="10%" class="table-textcenter">邮箱</th>
                         <th width="35%" class="table-textcenter">建议</th>
                         <th width="20%" class="table-textcenter">提交时间</th>
                         <th>操作</th>
@@ -77,7 +78,8 @@ function setVal(suoshuId,suoshuName) {
             		<tr>
                 		<td align="center" class="table-textcenter"><input name="duoxuan" type="checkbox" value="{$Suggest.id}" /></td>
                         <td class="table-textcenter">{$Suggest.id}</td>
-                        <td>{$Suggest.uid}</td>
+                        <td>{$Suggest.name}</td>
+                        <td>{$Suggest.email}</td>
                         <td>{$Suggest.suggest}</td>
                         <td>{$Suggest.posttime|date='Y-m-d H:i:s',###}</td>
                         <td class="table_config">

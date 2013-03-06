@@ -67,7 +67,6 @@ function setVal(suoshuId,suoshuName) {
                     	<th width="5%" class="table-textcenter">选择</th>
                         <th width="5%" class="table-textcenter">ID</th>
                         <th width="15%" class="table-textcenter">主播名</th>
-                        <th width="5%" class="table-textcenter">评论者</th>
                         <th width="35%" class="table-textcenter">评论</th>
                         <th width="20%" class="table-textcenter">评论时间</th>
                         <th>操作</th>
@@ -79,7 +78,6 @@ function setVal(suoshuId,suoshuName) {
                 		<td align="center" class="table-textcenter"><input name="duoxuan" type="checkbox" value="{$Comment.id}" /></td>
                         <td class="table-textcenter">{$Comment.id}</td>
                         <td>{$Comment.name}</td>
-                        <td>{$Comment.uid}</td>
                         <td>{$Comment.comment}</td>
                         <td>{$Comment.posttime|date='Y-m-d H:i:s',###}</td>
                         <td class="table_config">
