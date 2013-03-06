@@ -69,7 +69,9 @@ function setVal(suoshuId,suoshuName) {
                         <th width="15%" class="table-textcenter">主播名</th>
                         <th width="35%" class="table-textcenter">评论</th>
                         <th width="20%" class="table-textcenter">评论时间</th>
+                        <if condition="($Think.session.userpower eq 0)">
                         <th>操作</th>
+                        </if>
                   </tr>
                 </thead>
                 <tbody>
@@ -80,9 +82,11 @@ function setVal(suoshuId,suoshuName) {
                         <td>{$Comment.name}</td>
                         <td>{$Comment.comment}</td>
                         <td>{$Comment.posttime|date='Y-m-d H:i:s',###}</td>
+                        <if condition="($Think.session.userpower eq 0)">
                         <td class="table_config">
                           <a href="{:U('Comment/del?id='.$Comment["id"])}">删除</a>
                         </td>
+                    </if>
                 	</tr>
                     </volist>
                     <input type="hidden" name="duoxuanHidden" id="duoxuanHidden" value="" />

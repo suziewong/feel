@@ -90,7 +90,9 @@ function setVal(suoshuId,suoshuName) {
                         <td class="table_config">
                           <a href="{:U('DJ/view?id='.$DJ["id"])}">预览</a>
                           <a href="{:U('DJ/edit?id='.$DJ["id"])}">编辑</a>
+                          <if condition="($Think.session.userpower eq 0)">
                           <a href="{:U('DJ/del?id='.$DJ["id"])}">删除</a>
+                          </if>
                         </td>
                 	</tr>
                     </volist>
@@ -99,6 +101,7 @@ function setVal(suoshuId,suoshuName) {
                 </tbody>
             </table>
             </form>
+            <if condition="($Think.session.userpower eq 0)">
             <div class="batch_edit">
             <span><input name="" type="checkbox" value="" onclick=CheckAll('selectAll',this)></span>
             <select class="input-small" name="piliang" onChange="setPL();">
@@ -109,6 +112,7 @@ function setVal(suoshuId,suoshuName) {
                <div class="pagination-i">
                 {$page}
             </div>
+            </if>
         </div>
         <div class="copyright"></div>
       <script type="text/javascript">

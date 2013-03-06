@@ -135,7 +135,7 @@ class UserAction extends Action {
                 $result = $user->add($data);
                 if ( $result ) {
                     //成功提示
-                    $this->success('增加用户成功','../User/manage');
+                    $this->success('增加用户成功',U('User/manage'));
                 } else {
                     //错误提示
                     $this->error('增加用户失败');
@@ -199,12 +199,12 @@ class UserAction extends Action {
                 if ($result) 
                 {
                     //成功提示
-                    $this->success('编辑用户成功','../User/manage');
+                    $this->success('编辑用户成功',U('User/manage'));
                 }
                 else
                 {
                     //错误提示
-                    $this->error('编辑用户失败','../User/manage');
+                    $this->error('编辑用户失败',U('User/manage'));
                 }
             } 
         }
@@ -224,6 +224,26 @@ class UserAction extends Action {
         $id = $_GET['id'];
         $condition['userid'] = $id;
         $User = M('User');
+        $djid =  $User->where($condition)->find();
+        
+        if($djid['djid'] > 0)
+        {
+            $condition['id'] = $djid['djid'];
+            $DJ = M('Dj');
+            $dj = $DJ->where($condition)->find();
+            $this->del_file($dj['faceaddress']);
+            $this->del_file($dj['headaddress']);
+            $Life = M('Life');
+            $condition2['djid'] = $djid['djid'];
+            $life = $Life->where($condition2)->select();
+            $lifelength = count($life);
+            for($i=0;$i<$lifelength;$i++)
+            {
+               $this->del_file($life[$i]['lifeaddress']);
+            }
+            $result = $Life->where($condition2)->delete();  
+            $result = $DJ->where($condition)->delete();
+        }
         $result = $User->where($condition)->delete();
         if ($result) {
             //成功提示
@@ -232,7 +252,7 @@ class UserAction extends Action {
             //错误提示
             $this->error('用户删除失败');
         }
-    }
+    } 
     public function verify()
     {
         import('ORG.Util.Image');
@@ -275,6 +295,30 @@ class UserAction extends Action {
                 echo "}";
             }
 
+        }
+    }
+    //删除旧文件
+    public function del_file($filename)
+    {
+         ///删除文件使用绝对路径
+
+        $filename = $_SERVER['DOCUMENT_ROOT'].__ROOT__.$filename;
+//      echo $filename;
+//      exit;
+        if(is_file( $filename ))
+        {
+            if( unlink($filename) )
+            {
+                //echo '文件删除成功';
+            }
+            else
+            {
+                //echo '文件删除失败，权限不够';
+            }
+        }
+        else
+        {
+                //  echo '不是有一个有效的文件';
         }
     }        
 

@@ -89,13 +89,14 @@ class DJAction extends CommonAction {
 
     public function manage()
     {
+
         if(isset($_POST['duoxuanHidden'])) {
             $id = $_POST['duoxuanHidden'];
             
             $model = M("Dj");
 			$Life = M('Life');
             $map['id'] = array('in',$id);
-
+            $map2['djid'] = array('in',$id);
             $djs = $model->where($map)->select();
             $djlength = count($djs);
             for($i=0;$i<$djlength;$i++)
@@ -113,13 +114,24 @@ class DJAction extends CommonAction {
             }
             
             $result = $model->where($map)->delete();
+            $Users = M('User');
+            $result2 = $Users->where($map2)->delete();
         }
     	$DJList = array();
     	$DJ = M("Dj");
     	$page = isset($_GET['p'])? $_GET['p'] : '1';  //默认显示首页数据
 
-    	$DJ= $DJ->order('id asc')->select();
-    	while (list($key, $val) = each($DJ)) {
+
+        if(session('userpower') != 0)
+        {
+            $con['id']=session('djid');
+            $DJ= $DJ->where($con)->order('id asc')->select();
+        }
+        else
+        {
+    	   $DJ= $DJ->order('id asc')->select();
+    	}
+        while (list($key, $val) = each($DJ)) {
     	    array_push($DJList,$val);
     	}
     	
@@ -231,7 +243,11 @@ class DJAction extends CommonAction {
 		}
         $result = $Life->where($condition2)->delete();	
         $result = $DJ->where($condition)->delete();
-        if ($result) {
+
+        $userdata['djid']=$condition['id'];
+        $User = M('User');
+        $result2 = $User->where($userdata)->delete();
+        if ($result && $result2) {
             //成功提示
             $this->success('主播删除成功');
         } else {
