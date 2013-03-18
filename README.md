@@ -25,7 +25,7 @@ Feel电台
 
     TP 与Nginx 配置
     API地址：https://gist.github.com/suziewong/5014181
-    测试地址：http://feel.zjut.in/
+    
 
 #### 待完成
 
