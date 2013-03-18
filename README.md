@@ -24,7 +24,8 @@ Feel电台
     Template 前台模板切换
 
     TP 与Nginx 配置
-    API地址：
+    API地址：https://gist.github.com/suziewong/5014181
+    测试地址：http://feel.zjut.in/
 
 #### 待完成
 
