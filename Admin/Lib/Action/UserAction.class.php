@@ -16,13 +16,14 @@ class UserAction extends Action {
         $verify = $_POST["verify"];
         
         if(session('verify') != md5($_POST['verify'])) {
-            $msg = '验证码';
+            $msg = '验证码错误';
             $this->assign('message',$msg);// 提示信息
                     // 成功操作后默认停留1秒
             $this->assign('waitSecond','1');
                     // 登出成功返回登录页面
             $this->assign('jumpUrl',U('User/login'));
             $this->display(THINK_PATH.'Tpl/dispatch_jump.tpl');
+            exit;
         }
         $User = M("User");
         $condition['username'] = $username;
