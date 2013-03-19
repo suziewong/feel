@@ -1,5 +1,5 @@
 #
-# robots.txt for AimeeWMT
+# robots.txt for feel radio
 #
 
 User-agent: *
